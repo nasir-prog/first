@@ -18,16 +18,16 @@ class R2R_DAC:
 
     
     def set_number(self,number):
-        binary = [int (element) for element in bin(value)[2:].zfill(8)]
+        binary_array = [int (element) for element in bin(number)[2:].zfill(8)]
         print(f"биты: {binary_array}")
    
     def set_voltage(self,voltage):
-        if not (0.0 <= voltage <= dynamic_range):
-            print(f"Напряжение выходит за динамический диапазон ЦАП (0.00 - {dynamic_range:.2f} В)")
+        if not (0.0 <= voltage <= self.dynamic_range):
+            print(f"Напряжение выходит за динамический диапазон ЦАП (0.00 - {self.dynamic_range:.2f} В)")
             print("Устанавлниваем 0.0 В")
             number = 0
 
-        number = int(voltage / dynamic_range * 255)
+        number = int(voltage / self.dynamic_range * 255)
         print(f"число на вход ЦАП: {number}")
         self.set_number(number)
 
@@ -41,7 +41,8 @@ if __name__ == "__main__":
         while True:
             try:
                 voltage = float(input("Введите напряжение в Вольтах: "))
-                dac.set_voltage(voltage)
+                number = dac.set_voltage(voltage)
+                binary_array = dac.set_number(number)
                 GPIO.output(gpio_pins,binary_array)
 
             except ValueError:
