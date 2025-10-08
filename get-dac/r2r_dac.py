@@ -29,7 +29,7 @@ class R2R_DAC:
             number = 0
         number = int(voltage / self.dynamic_range * 255)
         print(f"число на вход ЦАП: {number}")
-        self.set_number(number)
+        return self.set_number(number)
 
 
 gpio_pins = [16, 20, 21, 25, 26, 17, 27, 22]
