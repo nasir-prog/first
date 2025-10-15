@@ -1,7 +1,8 @@
+
+import supporter_for_triangle as sup
 import r2r_dac as r2r
 import signal_generator as sg
 import time
-
 import RPi.GPIO as GPIO
 from math import  sin,pi
 
@@ -20,12 +21,14 @@ if __name__ == "__main__":
         gpio_pins=[16, 20, 21, 25, 26, 17, 27, 22]
         while True:
             try:
+                start_time = time.time()
                 current_time = time.time()-start_time
                 sg.wait_for_sampling_period(sampling_frequency)
-                voltage  = sg.get_sin_wave_amplitude(signal_frequency,current_time)
+                voltage  = sup.get_square_wave_amplitude(signal_frequency,current_time)
 
                 binary_array = dac.set_voltage(voltage)
                 GPIO.output(gpio_pins,binary_array)
+                current_time = time.time()-start_time
             except ValueError:
                 print("Вы ввели не число. Попробуйте ещё раз\n")
     
