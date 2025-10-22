@@ -16,7 +16,7 @@ class R2R_ADC:
 
     
     def deinit(self):
-        GPIO.output(self.gpio_bits, 0)
+        GPIO.output(self.bits_gpio, 0)
         GPIO.cleanup()
     
     def set_number(self, number):
@@ -99,4 +99,4 @@ if __name__ == "__main__":
             t.sleep(1)
     
     finally:
-        dac.deinit()
+        adc.deinit()
