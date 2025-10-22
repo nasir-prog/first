@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time as t
 
 class R2R_ADC:
-    def __init__(self, dynamic_range, compare_time = 0.01, verbose = False):
+    def __init__(self, dynamic_range, compare_time = 1, verbose = False):
         self.dynamic_range = dynamic_range
         self.verbose = verbose
         self.compare_time = compare_time
@@ -53,7 +53,7 @@ class R2R_ADC:
                 print(f"Шаг {number}: ЦАП = {number}, Компаратор = {comparator_state}")
             
             
-            if comparator_state == 0:
+            if comparator_state == 1:
                 
                 result = max(0, number - 1)
                 if self.verbose:
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     adc = None
     try:
         
-        adc = R2R_ADC(dynamic_range=3.28, compare_time=0.01, verbose=False)
+        adc = R2R_ADC(dynamic_range=3.28, compare_time=1, verbose=False)
         
         print("АЦП последовательного счёта запущен. Ctrl+C для остановки.")
         
@@ -99,8 +99,4 @@ if __name__ == "__main__":
             t.sleep(1)
     
     finally:
-<<<<<<< HEAD
         adc.deinit()
-=======
-        dac.deinit()
->>>>>>> d06d4f00f8cbeb74cef2acf7200f890d1f4e4cfb
