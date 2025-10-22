@@ -99,4 +99,8 @@ if __name__ == "__main__":
             t.sleep(1)
     
     finally:
+<<<<<<< HEAD
         adc.deinit()
+=======
+        dac.deinit()
+>>>>>>> d06d4f00f8cbeb74cef2acf7200f890d1f4e4cfb
